@@ -1,7 +1,7 @@
 package jp.ac.uryukyu.ie.e195740;
 
 public class PrintBoard {
-    void print(String[][] board){
+    void print(String[][] board,int blackCount,int whiteCount){
         for(int i=0;i<8;i++){
             System.out.println("•-----•-----•-----•-----•-----•-----•-----•-----•");
             System.out.print("|");
@@ -15,5 +15,6 @@ public class PrintBoard {
             System.out.println();
         }
         System.out.println("•-----•-----•-----•-----•-----•-----•-----•-----•");
+        System.out.println("black:"+blackCount+"   white:"+whiteCount);
     }
 }
