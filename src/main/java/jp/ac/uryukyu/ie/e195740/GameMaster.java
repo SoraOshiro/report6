@@ -29,9 +29,9 @@ public class GameMaster {
     void playGame(){
         while(black.getDiscCount()+white.getDiscCount()<64) {
             if (switchTurn) {
-                board.setDisc(black);
+                board.operationDisc(black);
             } else {
-                board.setDisc(white);
+                board.operationDisc(white);
             }
             printBoard.print(board.getBoard(),black.getDiscCount(),white.getDiscCount());
             switchTurn = !switchTurn;
