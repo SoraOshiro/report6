@@ -22,6 +22,7 @@ public class Board {
                 System.out.println("cannot action. plz reinsert.");
             }else{
                 board[rNum-1][cNum-1] = disc.getDiscColour();
+                disc.count();
                 checkBoard = true;
             }
         }
