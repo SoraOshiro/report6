@@ -36,6 +36,11 @@ public class GameMaster {
             printBoard.print(board.getBoard(),black.getDiscCount(),white.getDiscCount());
             switchTurn = !switchTurn;
         }
+        if(black.getDiscCount()>white.getDiscCount()){
+            System.out.println(black.getPlayerName()+" win!");
+        }else{
+            System.out.println(white.getPlayerName()+" win!");
+        }
     }
 
 }
