@@ -36,6 +36,11 @@ public class Board {
                 turnDown(rNum-1,cNum-1,disc);
                 turnLeft(rNum-1,cNum-1,disc);
                 turnRight(rNum-1,cNum-1,disc);
+                turnLeftUp(rNum-1,cNum-1,disc);
+                turnLeftDown(rNum-1,cNum-1,disc);
+                turnRightUp(rNum-1,cNum-1,disc);
+                turnRightDown(rNum-1,cNum-1,disc);
+
             }
         }
 
