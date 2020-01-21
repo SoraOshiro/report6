@@ -4,11 +4,14 @@ import java.util.Scanner;
 /**
  * Boardクラス
  * コマの格納、裏返しの処理など。
- *
- * String[][] board:コマを格納する二次元配列.
  */
 public class Board {
     private String board[][] = new String[8][8];
+
+    /**
+     * コンストラクタ。
+     * 宣言時に初期配置を完了させる。
+     */
     Board(){
         board[3][3] = "⚫︎";
         board[4][4] = "⚫︎";
@@ -16,6 +19,10 @@ public class Board {
         board[4][3] = "⚪︎";
     }
 
+    /**
+     * ターン中のコマの操作をするメソッド。
+     * @param disc コマの情報
+     */
     void operationDisc(Disc disc){
         int discPosition[];
         System.out.println("Now "+disc.getPlayerName()+"'s turn.");
@@ -27,6 +34,11 @@ public class Board {
         }
     }
 
+    /**
+     * 指定された座標にコマを格納するメソッド。
+     * @param position [0]にy座標、[1]にx座標が格納されている。
+     * @param disc コマの情報
+     */
     void setDisc(int[] position, Disc disc){
         int a = position[0];
         int b = position[1];
@@ -34,6 +46,10 @@ public class Board {
         disc.count();
     }
 
+    /**
+     * コマを置く座標を決定するためのメソッド。
+     * @return position 座標が格納された配列。
+     */
     int[] selectPosition(){
         int a = -1;
         int b = -1;
@@ -59,6 +75,12 @@ public class Board {
 
     }
 
+    /**
+     * コマを配置しようとしている座標が空かどうかを判定するメソッド。
+     * @param a y座標
+     * @param b x座標
+     * @return 空の場合true,空ではない場合falseを返す。
+     */
     boolean isPositionClear(int a, int b){
         if(board[a][b] == null){
             return true;
@@ -68,6 +90,11 @@ public class Board {
         }
     }
 
+    /**
+     * コマを裏返すメソッドをまとめたメソッド。
+     * @param position 指定された座標
+     * @param disc コマの情報
+     */
     void turnDisc(int[] position, Disc disc){
         int a = position[0];
         int b = position[1];
@@ -81,6 +108,12 @@ public class Board {
         turnRightDown(a,b,disc);
     }
 
+    /**
+     * 上方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnUp(int a,int b,Disc disc){
         if(a>1){
             if(board[a-1][b]!=disc.getDiscColour() && board[a-1][b]!=null){
@@ -99,6 +132,12 @@ public class Board {
         }
     }
 
+    /**
+     * 下方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnDown(int a,int b,Disc disc){
         if(a<6){
             if(board[a+1][b]!=disc.getDiscColour() ||  board[a+1][b] != null){
@@ -117,6 +156,12 @@ public class Board {
         }
     }
 
+    /**
+     * 左方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnLeft(int a,int b,Disc disc){
         if(b<6){
             if(board[a][b+1]!=disc.getDiscColour() ||  board[a][b+1] != null){
@@ -135,6 +180,12 @@ public class Board {
         }
     }
 
+    /**
+     * 右方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnRight(int a,int b,Disc disc){
         if(b>1){
             if(board[a][b-1]!=disc.getDiscColour() ||  board[a][b-1] != null){
@@ -153,6 +204,12 @@ public class Board {
         }
     }
 
+    /**
+     * 左上方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnLeftUp(int a,int b,Disc disc){
         if(a>1 && b>1){
             if(board[a-1][b-1]!=disc.getDiscColour() ||  board[a-1][b-1] != null){
@@ -171,6 +228,12 @@ public class Board {
         }
     }
 
+    /**
+     * 左下方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnLeftDown(int a,int b,Disc disc){
         if(a<6 && b>1){
             if(board[a+1][b-1]!=disc.getDiscColour() ||  board[a+1][b-1] != null){
@@ -189,6 +252,12 @@ public class Board {
         }
     }
 
+    /**
+     * 右上方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnRightUp(int a,int b,Disc disc){
         if(a>1 && b<6){
             if(board[a-1][b+1]!=disc.getDiscColour() ||  board[a-1][b+1] != null){
@@ -207,6 +276,12 @@ public class Board {
         }
     }
 
+    /**
+     * 右下方向の裏返しの処理をするメソッド。
+     * @param a y軸の座標
+     * @param b x軸の座標
+     * @param disc コマの情報
+     */
     void turnRightDown(int a,int b,Disc disc){
         if(a<6 && b<6){
             if(board[a+1][b+1]!=disc.getDiscColour() ||  board[a+1][b+1] != null){

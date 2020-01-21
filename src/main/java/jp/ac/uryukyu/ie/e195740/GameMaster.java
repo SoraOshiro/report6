@@ -5,7 +5,6 @@ import java.util.Scanner;
  * GameMasterクラス
  * ゲームの手順を管理。
  */
-
 public class GameMaster {
     Board board = new Board();
     PrintBoard printBoard = new PrintBoard();
