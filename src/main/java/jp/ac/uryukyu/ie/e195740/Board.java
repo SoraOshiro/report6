@@ -29,14 +29,7 @@ public class Board {
         int b = position[1];
         board[a][b] = disc.getDiscColour();
         disc.count();
-        turnUp(a,b,disc);
-        turnDown(a,b,disc);
-        turnLeft(a,b,disc);
-        turnRight(a,b,disc);
-        turnLeftUp(a,b,disc);
-        turnLeftDown(a,b,disc);
-        turnRightUp(a,b,disc);
-        turnRightDown(a,b,disc);
+        turnDisc(a,b,disc);
     }
 
     int[] selectPosition(){
@@ -71,6 +64,17 @@ public class Board {
             System.out.println("This position was already set disc. plz another position.");
             return false;
         }
+    }
+
+    void turnDisc(int a, int b, Disc disc){
+        turnUp(a,b,disc);
+        turnDown(a,b,disc);
+        turnLeft(a,b,disc);
+        turnRight(a,b,disc);
+        turnLeftUp(a,b,disc);
+        turnLeftDown(a,b,disc);
+        turnRightUp(a,b,disc);
+        turnRightDown(a,b,disc);
     }
 
     void turnUp(int a,int b,Disc disc){
