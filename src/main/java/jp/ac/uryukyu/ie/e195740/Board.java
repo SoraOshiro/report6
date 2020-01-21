@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class Board {
     private String board[][] = new String[8][8];
+    private int countDisc[] = new int[2];
 
     /**
      * コンストラクタ。
@@ -17,6 +18,8 @@ public class Board {
         board[4][4] = "⚫︎";
         board[3][4] = "⚪︎";
         board[4][3] = "⚪︎";
+        countDisc[0] = 2;
+        countDisc[1] = 2;
     }
 
     /**
@@ -43,7 +46,6 @@ public class Board {
         int a = position[0];
         int b = position[1];
         board[a][b] = disc.getDiscColour();
-        disc.count();
     }
 
     /**
@@ -57,6 +59,8 @@ public class Board {
         boolean positionChecker = false;
 
         while(!positionChecker) {
+            a = -1;
+            b = -1;
             while (a < 0 || 7 < a) {
                 System.out.println("plz insert rows num.(1~8)");
                 Scanner aPosition = new Scanner(System.in);
@@ -123,7 +127,6 @@ public class Board {
                     }else if(board[a-i][b].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a-t][b] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -147,7 +150,6 @@ public class Board {
                     }else if(board[a+i][b].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a+t][b] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -171,7 +173,6 @@ public class Board {
                     }else if(board[a][b+i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a][b+t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -195,7 +196,6 @@ public class Board {
                     }else if(board[a][b-i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a][b-t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -219,7 +219,6 @@ public class Board {
                     }else if(board[a-i][b-i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a-t][b-t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -243,7 +242,6 @@ public class Board {
                     }else if(board[a+i][b-i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a+t][b-t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -267,7 +265,6 @@ public class Board {
                     }else if(board[a-i][b+i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a-t][b+t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -291,7 +288,6 @@ public class Board {
                     }else if(board[a+i][b+i].equals(disc.getDiscColour())){
                         for(int t =1;t<i;t++){
                             board[a+t][b+t] = disc.getDiscColour();
-                            disc.count();
                         }
                         break;
                     }
@@ -323,6 +319,29 @@ public class Board {
             }
         }
         return returnCheck;
+    }
+
+    /**
+     * ゲーム終了時の盤面のコマの数を数えて勝敗を決定するメソッド
+     * @return blackが多ければtrueを、whiteが多ければfalseを返す。
+     */
+    boolean countFinishDisc(){
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(board[i][j] == "⚪︎"){
+                    countDisc[0] += 1;
+                }else{
+                    countDisc[1] += 1;
+                }
+            }
+        }
+        if(countDisc[0] > countDisc[1]){
+            //blackの方が多かったら
+            return true;
+        }else{
+            //white
+            return false;
+        }
     }
 
     //getter

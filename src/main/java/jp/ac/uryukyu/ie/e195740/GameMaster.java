@@ -31,17 +31,19 @@ public class GameMaster {
      * ターンの管理。終了後は試合結果を表示。
      */
     void playGame(){
-        printBoard.print(board.getBoard(),black.getDiscCount(),white.getDiscCount());
-        while(black.getDiscCount()+white.getDiscCount()<64) {
+        int turnCount = 0;
+        printBoard.print(board.getBoard());
+        while(turnCount<60) {
             if (switchTurn) {
                 board.operationDisc(black);
             } else {
                 board.operationDisc(white);
             }
-            printBoard.print(board.getBoard(),black.getDiscCount(),white.getDiscCount());
+            printBoard.print(board.getBoard());
             switchTurn = !switchTurn;
+            turnCount += 1;
         }
-        if(black.getDiscCount()>white.getDiscCount()){
+        if(board.countFinishDisc()){
             System.out.println(black.getPlayerName()+" win!");
         }else{
             System.out.println(white.getPlayerName()+" win!");

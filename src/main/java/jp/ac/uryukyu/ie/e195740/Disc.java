@@ -5,7 +5,6 @@ package jp.ac.uryukyu.ie.e195740;
  */
 abstract class Disc {
     String discColour;
-    int discCount = 2;
     private String playerName;
 
     /**
@@ -15,13 +14,6 @@ abstract class Disc {
      */
     Disc(String playerName){
         this.playerName = playerName;
-    }
-
-    /**
-     * 盤面上のコマのカウント。
-     */
-    void count(){
-        discCount += 1;
     }
 
     //getter
@@ -41,11 +33,5 @@ abstract class Disc {
     String getPlayerName(){
         return playerName;
     }
-
-    /**
-     * getDiscCount.
-     * @return discCountを返す。
-     */
-    int getDiscCount(){return discCount;}
 
 }
