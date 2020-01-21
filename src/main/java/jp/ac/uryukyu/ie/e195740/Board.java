@@ -1,6 +1,12 @@
 package jp.ac.uryukyu.ie.e195740;
 import java.util.Scanner;
 
+/**
+ * Boardクラス
+ * コマの格納、裏返しの処理など。
+ *
+ * String[][] board:コマを格納する二次元配列.
+ */
 public class Board {
     private String board[][] = new String[8][8];
     void preparationDisc(int rowsNum, int columnsNum, Disc disc){
@@ -9,41 +15,62 @@ public class Board {
     }
 
     void operationDisc(Disc disc){
-        boolean checkBoard = false;
+        int discPosition[];
         System.out.println("Now "+disc.getPlayerName()+"'s turn.");
         boolean pass = passCheck();
         if(!pass) {
-            setDisc(disc);
+            discPosition = selectPosition();
+            setDisc(discPosition,disc);
         }
     }
 
-    void setDisc(Disc disc){
-        boolean checkBoard = false;
-        while (!checkBoard) {
-            System.out.println("plz insert rows num.(1~8)");
-            Scanner row = new Scanner(System.in);
-            int rNum = row.nextInt();
-            System.out.println("plz insert columns num.(1~8)");
-            Scanner column = new Scanner(System.in);
-            int cNum = column.nextInt();
-            if (rNum > 8 || rNum < 1 || cNum > 8 || cNum < 1 || board[rNum - 1][cNum - 1] != null) {
-                System.out.println("cannot action. plz reinsert.");
-            } else {
-                board[rNum - 1][cNum - 1] = disc.getDiscColour();
-                disc.count();
-                checkBoard = true;
-                turnUp(rNum-1,cNum-1,disc);
-                turnDown(rNum-1,cNum-1,disc);
-                turnLeft(rNum-1,cNum-1,disc);
-                turnRight(rNum-1,cNum-1,disc);
-                turnLeftUp(rNum-1,cNum-1,disc);
-                turnLeftDown(rNum-1,cNum-1,disc);
-                turnRightUp(rNum-1,cNum-1,disc);
-                turnRightDown(rNum-1,cNum-1,disc);
+    void setDisc(int[] position, Disc disc){
+        int a = position[0];
+        int b = position[1];
+        board[a][b] = disc.getDiscColour();
+        disc.count();
+        turnUp(a,b,disc);
+        turnDown(a,b,disc);
+        turnLeft(a,b,disc);
+        turnRight(a,b,disc);
+        turnLeftUp(a,b,disc);
+        turnLeftDown(a,b,disc);
+        turnRightUp(a,b,disc);
+        turnRightDown(a,b,disc);
+    }
 
+    int[] selectPosition(){
+        int a = -1;
+        int b = -1;
+        int position[] = new int[2];
+        boolean positionChecker = false;
+
+        while(!positionChecker) {
+            while (a < 0 || 7 < a) {
+                System.out.println("plz insert rows num.(1~8)");
+                Scanner aPosition = new Scanner(System.in);
+                a = aPosition.nextInt() - 1;
             }
+            while (b < 0 || 7 < b) {
+                System.out.println("plz insert columns num.(1~8)");
+                Scanner bPosition = new Scanner(System.in);
+                b = bPosition.nextInt() - 1;
+            }
+            positionChecker = isPositionClear(a, b);
         }
+        position[0] = a;
+        position[1] = b;
+        return position;
 
+    }
+
+    boolean isPositionClear(int a, int b){
+        if(board[a][b] == null){
+            return true;
+        }else{
+            System.out.println("This position was already set disc. plz another position.");
+            return false;
+        }
     }
 
     void turnUp(int a,int b,Disc disc){
@@ -190,6 +217,10 @@ public class Board {
         }
     }
 
+    /**
+     * 手番をパスするかどうかの真偽値を返す。
+     * @return returnCheck パスするかどうかの真偽値(trueでパス)
+     */
     boolean passCheck(){
         boolean pCheck = false;
         boolean returnCheck = false;
@@ -199,7 +230,7 @@ public class Board {
             Scanner pc = new Scanner(System.in);
             pass = pc.next();
             if(pass.equals("y")){
-                pCheck = true;;
+                pCheck = true;
                 returnCheck = true;
             }else if(pass.equals("n")){
                 pCheck = true;
@@ -212,6 +243,11 @@ public class Board {
     }
 
     //getter
+
+    /**
+     * boardを返す
+     * @return board コマが格納されている配列
+     */
     String[][] getBoard(){
         return board;
     }
