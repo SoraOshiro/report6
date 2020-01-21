@@ -9,9 +9,11 @@ import java.util.Scanner;
  */
 public class Board {
     private String board[][] = new String[8][8];
-    void preparationDisc(int rowsNum, int columnsNum, Disc disc){
-        board[rowsNum-1][columnsNum-1] = disc.getDiscColour();
-        disc.count();
+    Board(){
+        board[3][3] = "⚫︎";
+        board[4][4] = "⚫︎";
+        board[3][4] = "⚪︎";
+        board[4][3] = "⚪︎";
     }
 
     void operationDisc(Disc disc){
@@ -21,6 +23,7 @@ public class Board {
         if(!pass) {
             discPosition = selectPosition();
             setDisc(discPosition,disc);
+            turnDisc(discPosition,disc);
         }
     }
 
@@ -29,7 +32,6 @@ public class Board {
         int b = position[1];
         board[a][b] = disc.getDiscColour();
         disc.count();
-        turnDisc(a,b,disc);
     }
 
     int[] selectPosition(){
@@ -66,7 +68,9 @@ public class Board {
         }
     }
 
-    void turnDisc(int a, int b, Disc disc){
+    void turnDisc(int[] position, Disc disc){
+        int a = position[0];
+        int b = position[1];
         turnUp(a,b,disc);
         turnDown(a,b,disc);
         turnLeft(a,b,disc);

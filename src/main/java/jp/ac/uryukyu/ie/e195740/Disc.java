@@ -2,7 +2,7 @@ package jp.ac.uryukyu.ie.e195740;
 
 abstract class Disc {
     String discColour;
-    int discCount = 0;
+    int discCount = 2;
     private String playerName;
     Disc(String playerName){
         this.playerName = playerName;
